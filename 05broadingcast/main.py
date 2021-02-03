@@ -53,19 +53,19 @@ Match from last (right) Dim:
 x = tf.random.normal([4, 32, 32, 3])
 
 y = tf.random.normal([3])
-# y_ = tf.broadcast_to(y, x)
-s = x + y  # broadcasting y: [3] to [4, 32, 32, 3]
+# y_ = tf.broadcast_to(y_, x_)
+s = x + y  # broadcasting y_: [3] to [4, 32, 32, 3]
 
 y1 = tf.random.normal([32, 32, 1])
-# y1_ = tf.broadcast_to(y1, x)
+# y1_ = tf.broadcast_to(y1, x_)
 s1 = x + y1  # broadcasting y1: [32, 32, 1] to [4, 32, 32, 3]
 
 y2 = tf.random.normal([4, 1, 1, 1])
-# y2_ = tf.broadcast_to(y2, x)
+# y2_ = tf.broadcast_to(y2, x_)
 s2 = x + y2  # broadcasting y2: [4, 1, 1, 1] to [4, 32, 32, 3]
 
 y3 = tf.random.normal([1, 4, 1, 1])
-# s3 = x + y3  # cannot cast coz axis-1
+# s3 = x_ + y3  # cannot cast coz axis-1
 
 
 """

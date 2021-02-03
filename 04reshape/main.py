@@ -28,7 +28,7 @@ Switch h, w
 
 b = tf.random.normal([4, 28, 28, 3])
 b1 = tf.transpose(a)
-b2 = tf.transpose(a, perm=[0, 2, 1, 3])  # perm[previous x dim]
+b2 = tf.transpose(a, perm=[0, 2, 1, 3])  # perm[previous x_ dim]
 
 
 """"

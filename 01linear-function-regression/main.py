@@ -6,7 +6,7 @@ def compute_error_for_line_given_points(b, w, points):
     compute the loss function of a linear regression
     :param b: intersection
     :param w: gradient
-    :param points: array of points [x, y]
+    :param points: array of points [x_, y_]
     :return: the average loss of the regression model
     """
     total_loss = 0
@@ -38,7 +38,7 @@ def step_gradient(b_current, w_current, points, learning_rate):
 def gradient_descent_runner(points, b_starting, w_starting, learning_rate, num_iterations):
     """
     wrap the step_gradient function in a for loop to continuously compute the b and w
-    :param points: an array of x and y
+    :param points: an array of x_ and y_
     :param b_starting:
     :param w_starting:
     :param learning_rate:
@@ -55,7 +55,7 @@ def gradient_descent_runner(points, b_starting, w_starting, learning_rate, num_i
 def run():
     points = np.genfromtxt("data.csv", delimiter=",")
     learning_rate = 0.0001
-    initial_b = 0  # initial y-intercept guess
+    initial_b = 0  # initial y_-intercept guess
     initial_w = 0  # initial slope guess
     num_iterations = 100000
     print("Starting gradient descent at b = {0}, w = {1}, error = {2}"

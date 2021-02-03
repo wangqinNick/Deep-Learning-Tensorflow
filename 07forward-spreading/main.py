@@ -5,11 +5,11 @@ import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
 """Load data"""
-# x: [60k, 28, 28]
-# y: [60k]
+# x_: [60k, 28, 28]
+# y_: [60k]
 (x, y), _ = datasets.mnist.load_data()
 
-# x: [0-255] -> [0-1.]
+# x_: [0-255] -> [0-1.]
 x = tf.convert_to_tensor(x, dtype=tf.float32) / 255.
 y = tf.convert_to_tensor(y, dtype=tf.int32)
 
@@ -34,17 +34,17 @@ lr = 1e-3  # 10^-3
 
 for epoch in range(30):  # iter db for 10 times
     for step, (x, y) in enumerate(train_db):  # for every batch in db
-        # x: [128, 28, 28]
-        # y: [128]
+        # x_: [128, 28, 28]
+        # y_: [128]
         # [b, 28, 28] -> [b, 28*28]
         x = tf.reshape(x, [-1, 28*28])
 
         # wrapped in gradient computation
         with tf.GradientTape() as tape:  # tracks only tf.Variable
-            # x: [b, 28*28]
-            # h1 = x@w1 + b1
+            # x_: [b, 28*28]
+            # h1 = x_@w1 + b1
             # layer 1: [b, 784]@[784, 256] + [256] -> [b, 256]
-            h1 = x@w1 + b1  # h1 = x@w1 + tf.broadcast_to(b1, [x.shape[0], 256])
+            h1 = x@w1 + b1  # h1 = x_@w1 + tf.broadcast_to(b1, [x_.shape[0], 256])
             h1 = tf.nn.relu(h1)
             # layer 2: [b, 256]@[256, 128] + [128] -> [b, 128]
             h2 = h1@w2 + b2
@@ -54,9 +54,9 @@ for epoch in range(30):  # iter db for 10 times
 
             # compute loss
             # out: [b, 10]
-            # y: [b] -> [b, 10]
+            # y_: [b] -> [b, 10]
             y_one_hot = tf.one_hot(y, depth=10)
-            # mse = mean ( sum (y-out)^2)
+            # mse = mean ( sum (y_-out)^2)
             # loss: [b, 10]
             square_ = tf.square(y_one_hot - out)
             # mean: scalar

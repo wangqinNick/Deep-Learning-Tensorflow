@@ -56,7 +56,7 @@ rr = tf.constant([[1, 2], [2, 3]], dtype=tf.float32)
 """
 []: (scalar) loss, accuracy
 [d]: (vector) bias(b)
-[h, w]: (matrix) input x, weight
+[h, w]: (matrix) input x_, weight
 [b, len, vec] vec: encoding length
 [b, h, w, c] image:                      [num_pictures, height, width, 3(rgb)], feature maps
 [t, b, h, w, c] meta-learning: [num_task, single_task...]

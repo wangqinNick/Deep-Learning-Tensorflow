@@ -45,7 +45,7 @@ unstack
 size = 1 (fixed)
 """
 c1, d1 = tf.unstack(cd, axis=0)  # [4, 35, 8]
-cd_list1 = tf.unstack(cd, axis=3)  # 8 x [2, 4, 35]
+cd_list1 = tf.unstack(cd, axis=3)  # 8 x_ [2, 4, 35]
 
 """"
 split

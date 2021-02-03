@@ -14,7 +14,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 xs = tf.convert_to_tensor(xs, dtype=tf.float32) / 255.
 ys = tf.convert_to_tensor(ys, dtype=tf.int32)
 
-# convert the y value to one_hot value
+# convert the y_ value to one_hot value
 ys = tf.one_hot(ys, depth=10)
 
 # change the the Dataset object, so that the GPU can compute a batch of data at one time
