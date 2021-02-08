@@ -9,7 +9,7 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 # xs = [60K, 28, 28]
 # ys is the actual value of the image: 0, 1, 2, ..., 9
 # ys = [60k]
-# x_val and y_val are the correspondent test data
+# x_test and y_test are the correspondent test data
 (xs, ys), (x_val, y_val) = datasets.mnist.load_data()
 xs = tf.convert_to_tensor(xs, dtype=tf.float32) / 255.
 ys = tf.convert_to_tensor(ys, dtype=tf.int32)

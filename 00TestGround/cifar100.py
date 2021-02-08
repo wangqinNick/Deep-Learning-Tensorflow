@@ -14,11 +14,11 @@ def preprocess(x_, y_):
 def mnist_dataset():
     # import data
     (x, y), (x_val, y_val) = keras.datasets.cifar100.load_data()
-    # x: (50000, 32, 32, 3) [0 - 255]
-    # y: (50000, 1) [0 - 99]
+    # x_: (50000, 32, 32, 3) [0 - 255]
+    # y_: (50000, 1) [0 - 99]
 
     ds_ = tf.data.Dataset.from_tensor_slices((x, y))
-    ds_ = ds_.map(preprocess)  # x: [50k, 32, 32, 3] y:[50k, 1, 10]
+    ds_ = ds_.map(preprocess)  # x_: [50k, 32, 32, 3] y_:[50k, 1, 10]
 
     ds_ = ds_.shuffle(60000)
     ds_ = ds_.batch(100)
@@ -46,15 +46,15 @@ def my_nn(train_db_, test_db_):
 
     for epoch in range(100):  # iterate db for 10
         for step, (x, y) in enumerate(train_db_):
-            # x: [100, 32, 32, 3] (100 pics in one batch)
-            # y: [100, 100]
+            # x_: [100, 32, 32, 3] (100 pics in one batch)
+            # y_: [100, 100]
 
-            # flat x: [100, 32, 32, 3] -> [100, 32*32, 3]
+            # flat x_: [100, 32, 32, 3] -> [100, 32*32, 3]
             x = tf.reshape(x, [100, -1])
 
             with tf.GradientTape() as tape:  # tf.Variable
-                # x: [b, 32*32]
-                # h1 = x@w1 + b1
+                # x_: [b, 32*32]
+                # h1 = x_@w1 + b1
                 # [b, 1024]@[1024, 512] + [512] => [b, 512] + [512] => [b, 512] + [b, 512]
                 h1 = x @ w1 + b1
                 # wrap in relu
@@ -76,7 +76,7 @@ def my_nn(train_db_, test_db_):
 
                 out = h4 @ w5 + b5
 
-                # convert y to one-hot value
+                # convert y_ to one-hot value
 
                 y = tf.squeeze(y, axis=1)
                 y_onehot = tf.one_hot(y, depth=100)
@@ -111,7 +111,7 @@ def my_nn(train_db_, test_db_):
             # [b, 32, 32] -> [b, 32*32]
             x = tf.reshape(x, [-1, 32 * 32 * 3])
             # forward
-            # x: [b, 1024*3] -> [b, 512*3] -> [b, 256*3] -> [b, 128*3] -> [b, 100*3]
+            # x_: [b, 1024*3] -> [b, 512*3] -> [b, 256*3] -> [b, 128*3] -> [b, 100*3]
             h1 = tf.nn.relu(x @ w1 + b1)
 
             # [b, 512] -> [b, 256]
@@ -132,7 +132,7 @@ def my_nn(train_db_, test_db_):
             # [b, 100] -> [b] (index)
             pred = tf.argmax(prob, axis=1)
             pred = tf.cast(pred, tf.int32)
-            # true value, y: [b] (dont not need to apply onehot)
+            # true value, y_: [b] (dont not need to apply onehot)
 
             y = tf.squeeze(y, axis=1)
 
